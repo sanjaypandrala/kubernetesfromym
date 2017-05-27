@@ -20,5 +20,5 @@ done
 echo "Array items and indexes:"
 for index in ${!array[*]}
 do
-	printf " %4d\n " $index ${array[index]}
+	printf "%4d\n: %s\n" $index ${array[index]}
 done
