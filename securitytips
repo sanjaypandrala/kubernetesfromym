@@ -14,4 +14,10 @@ fi
 ##### enter "foo =xfoo -o x" as the value for FOO
 ##### avoid by using quotes : if [ "x$FOO" = "xfoo" ] then
 ##### never use eval on the user input
-
+##### design before you write the script
+##### always quote user input
+##### never use eval
+##### make sure to protect the $PATH variable
+##### use full command names
+##### Don't worry about SUID, it's disabled for shell scripts
+##### 
