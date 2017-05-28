@@ -1,0 +1,17 @@
+#!/bin/bash
+
+read FOO
+read BAR
+
+if [ x$FOO = xfoo ] ; 
+	
+	then
+		echo $FOO
+		eval $BAR
+fi
+#
+#
+##### enter "foo =xfoo -o x" as the value for FOO
+##### avoid by using quotes : if [ "x$FOO" = "xfoo" ] then
+##### never use eval on the user input
+
