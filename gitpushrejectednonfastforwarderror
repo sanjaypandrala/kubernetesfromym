@@ -1,0 +1,4 @@
+# all we have to do is exec the following
+
+#git pull origin master
+#git push origin master
