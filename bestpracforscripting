@@ -1,0 +1,66 @@
+# using include files with source or . 
+# type
+# type ls
+# type useradd
+# type time
+# time ls
+# which time
+# /usr/bin/time ls
+# use internal commands while writing the scripts 
+###### use help command to get the internal cmds
+# 
+#
+#GNU bash, version 4.2.46(1)-release (x86_64-redhat-linux-gnu)
+#These shell commands are defined internally.  Type `help' to see this list.
+#Type `help name' to find out more about the function `name'.
+#Use `info bash' to find out more about the shell in general.
+#Use `man -k' or `info' to find out more about commands not in this list.
+#
+#A star (*) next to a name means that the command is disabled.
+#
+#job_spec [&]               history [-c] [-d offset>
+#(( expression ))           if COMMANDS; then COMMA>
+#. filename [arguments]     jobs [-lnprs] [jobspec >
+#:                          kill [-s sigspec | -n s>
+#[ arg... ]                 let arg [arg ...]
+#[[ expression ]]           local [option] name[=va>
+#alias [-p] [name[=value]>  logout [n]
+#bg [job_spec ...]          mapfile [-n count] [-O >
+#bind [-lpvsPVS] [-m keym>  popd [-n] [+N | -N]
+#break [n]                  printf [-v var] format 
+#builtin [shell-builtin [>  pushd [-n] [+N | -N | d>
+#caller [expr]              pwd [-LP]
+#builtin [shell-builtin [>  pushd [-n] [+N | -N | d>
+#caller [expr]              pwd [-LP]
+#case WORD in [PATTERN [|>  read [-ers] [-a array] >
+#cd [-L|[-P [-e]]] [dir]    readarray [-n count] [->
+#command [-pVv] command [>  readonly [-aAf] [name[=>
+#compgen [-abcdefgjksuv] >  return [n]
+#complete [-abcdefgjksuv]>  select NAME [in WORDS .>
+#compopt [-o|+o option] [>  set [-abefhkmnptuvxBCHP>
+#continue [n]               shift [n]
+#coproc [NAME] command [r>  shopt [-pqsu] [-o] [opt>
+#declare [-aAfFgilrtux] [>  source filename [argume>
+#dirs [-clpv] [+N] [-N]     suspend [-f]
+#disown [-h] [-ar] [jobsp>  test [expr]
+#echo [-neE] [arg ...]      time [-p] pipeline
+#enable [-a] [-dnps] [-f >  times
+#eval [arg ...]             trap [-lp] [[arg] signa>
+#exec [-cl] [-a name] [co>  true
+#exit [n]                   type [-afptP] name [nam>
+#export [-fn] [name[=valu>  typeset [-aAfFgilrtux] >
+#false                      ulimit [-SHacdefilmnpqr>
+#fc [-e ename] [-lnr] [fi>  umask [-p] [-S] [mode]
+#fg [job_spec]              unalias [-a] name [name>
+#for NAME [in WORDS ... ]>  unset [-f] [-v] [name .>
+#for (( exp1; exp2; exp3 >  until COMMANDS; do COMM>
+#function name { COMMANDS>  variables - Names and m>
+#getopts optstring name [>  wait [id]
+#hash [-lr] [-p pathname]>  while COMMANDS; do COMM>
+#help [-dms] [pattern ...>  { COMMANDS ; }
+#
+#start with bash -r
+#ln -s /bin/bash /bin/rbash
+# rbash features no cd to root no modifications of ENV and PATH no functions no output redirection
+#
+#
