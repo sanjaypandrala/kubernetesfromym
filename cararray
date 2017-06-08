@@ -1,6 +1,6 @@
 #!/bin/bash
 # define an array called cararray
-
+# using c- style syntax
 cars=("Ford" "Jaguar" "Geely" "Daf" "BMw" "Kia" "Opel" )
 len=${#cars[*]} # get total elements in an array
 
