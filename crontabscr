@@ -1,0 +1,15 @@
+#!/bin/bash
+################
+###Use the following command to run a script every 5 minutes, every day:
+5 * * * *      $HOME/bin/daily.job >> $HOME/tmp/out  2>&1
+###Use the following command to run 5 minutes after midnight every day:
+5 0 * * *      $HOME/bin/daily.job >> $HOME/tmp/out  2>&1
+###Use the following command to run at 2.15 P.M. on the first of every month—the output is mailed to Paul:
+15 14 1 * * *     $HOME/bin/monthly
+###Use the following command to run at 10 P.M. on weekdays, send the e-mail to <naga@abc.com>:
+0 22 * *  1-5   sendmail ganesh@abc.com  < ~/work/email.txt
+###The sendmail utility is used for sending e-mails. We can use the mail utility also as follows:
+sendmail naga@example.com  < /tmp/email.txt
+###The following commands are self-explanatory from text of echo:
+23  0-23/2  *  *  *  echo "run 23 minutes after midn, 2 am, 4 am, everyday
+5 4 *  *  sun        echo "run at 5 after 4 every Sunday"
