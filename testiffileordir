@@ -1,0 +1,21 @@
+#!/bin/bash
+# Check if file is Directory
+# created totestwork dir with test.txt file
+[ -d totestwork ]
+echo $?
+# Check that is it a File
+[ -f numbers.txt ]
+echo $?
+# Check if File has size greater than 0
+[ -s numbers.txt ]
+echo $?
+# check if the file has read permission
+[ -r file2 ]
+echo $?
+# check if the file has read permission
+[ -w file2 ]
+echo $?
+# check if the file has read permission
+[ -x file2 ]
+echo $?
+
