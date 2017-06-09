@@ -1,0 +1,21 @@
+#!/bin/bash
+echo "enter mdays :"
+read "days"
+echo "enter months :"
+read "months"
+
+
+if (( $days <  0 || $days > 30 ))
+    then
+        echo "mdays is out of range"
+        exit 2
+fi
+
+if	(( $months < 0 || $months > 12 ))
+	then
+		echo " months is out of range"
+		exit 4
+fi
+		echo " your dates are validated you can continue"
+exit 0
+
