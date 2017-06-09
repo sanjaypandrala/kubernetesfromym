@@ -1,0 +1,17 @@
+#!/bin/bash
+
+###Using the if/elif/else commands, we can have multiple decision-making processes. If the if command succeeds, the command after then will be executed. If it fails, the command after the elif statement will be tested. If that statement succeeds, then statements under the elif are executed. However, suppose none of the elif conditions are true, then statements after the else command are executed. Here, the else block is executed by default. The fi statement will close the if/elif/else command.
+
+echo "Kindly enter name of directory : "
+read file
+
+if [[ -d $file ]]
+then
+        echo "$file is a directory"
+elif [[ -f $file ]]
+    then
+    echo "$file is a file."
+ else
+       echo "$file is neither a file nor a directory. "
+fi
+
