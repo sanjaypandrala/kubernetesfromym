@@ -1,0 +1,6 @@
+#!/bin/bash
+for var in user{5..7}
+do
+  useradd -m $var
+  passwd  -d $var
+done
