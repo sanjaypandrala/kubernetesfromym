@@ -1,0 +1,81 @@
+#!/bin/bash
+echo "$1 is: "
+if ! [ -e $1 ]
+then
+  echo "..Do not exists"
+  exit
+else
+  echo "file is present"
+fi
+
+if [ -x $1 ]
+then
+  echo "..Executable"
+fi
+
+if [ -r $1 ]
+then
+  echo "..Readable"
+fi
+
+if [ -b $1 ]
+then
+  echo "..file is block special"
+fi
+
+
+if [ -c $1 ]
+then
+  echo "..file is character special "
+fi
+
+if [ -d $1 ]
+then
+  echo "..yes it is a directory"
+fi
+
+if [ -G $1 ]
+then
+  echo "..file is existing owned by group Id"
+fi
+
+if [ -g $1 ]
+then
+  echo "..file has set-group-id"
+fi
+
+if [ -k $1 ]
+then
+  echo "..file has sticky bit set"
+fi
+
+if [ -L $1 ]
+then
+  echo "..file is a symbolic link"
+fi
+
+if [ -p $1 ]
+then
+  echo "..file is named pipe"
+fi
+
+if [ -O $1 ]
+then
+  echo "..file owned by the user ID"
+fi
+
+if [ -S $1 ]
+then
+  echo "..file is a socket"
+fi
+
+if [ -t  $1 ]
+then
+  echo "..file has fd (file descriptor)opened on a terminal"
+fi
+
+if [ -u $1 ]
+then
+  echo "..file has set-userid bit set"
+fi
+
