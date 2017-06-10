@@ -1,0 +1,2 @@
+$ unset -f hello
+$ declare -f# Check the function in shell environment.
