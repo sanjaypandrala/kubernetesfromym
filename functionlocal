@@ -1,0 +1,15 @@
+#!/bin/bash
+# To make a variable local, we declare it as follows:
+#local var=value
+#local varName
+
+name="John"
+hello()
+{ 
+local  localvarname="Mary"
+echo $localvarname
+}
+echo $name   # name contains John
+hello        # name contains Mary
+echo $name   # name contains John
+
