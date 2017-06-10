@@ -1,4 +1,7 @@
 #!/bin/bash
+# yum install -y dialog
+# sample dialog box with the following cmd dialog --msgbox "This is a message." 10 50
+
 dialog --title "Delete file" \
 --backtitle "Learning Dialog Yes-No box" \
 --yesno "Do you want to delete file \"~/work/sample24.txt\"?" 7 60
