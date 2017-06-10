@@ -1,0 +1,5 @@
+#!/bin/bash
+dialog --radiolist  "This is a selective list, where only one \
+option can be chosen" 10 50 2 \
+"a" "This is the first option" "off" \
+"b" "This is the second option" "on"
