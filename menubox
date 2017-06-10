@@ -26,7 +26,7 @@ while true
 do
 
 # Show main menu
-dialog --help-button --clear --backtitle "Learn Shell Scripting" \
+dialog --help-button --clear --backtitle "Naga Shell Scripting" \
 --title "[ Demo Menubox ]" \
 --menu "Please use up/down arrow keys, number keys\n\
 1,2,3.., or the first character of choice\n\
