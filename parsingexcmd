@@ -1,0 +1,12 @@
+#!/bin/bash
+# diff methods to parse
+
+echo "[INFO] Total time: 2 minutes 8 seconds " | sed 's/^.*: \(.*\)$/\1/'
+
+echo '[INFO] Total time: 3 minutes 8 seconds' | grep -o '[[:digit:]].*$'
+
+echo '[INFO] Total time: 4 minutes 8 seconds' | sed 's/.*: //'
+
+echo '[INFO] Total time: 5 minutes 8 seconds' | awk -F': ' '{print $2}'
+
+echo '[INFO] Total time: 6 minutes 8 seconds' | cut -d: -f2
