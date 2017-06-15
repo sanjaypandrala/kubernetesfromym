@@ -4,3 +4,9 @@ $ yum install ansible
 $ echo "127.0.0.1" > ~/ansible_hosts
 $ export ANSIBLE_INVENTORY=~/ansible_hosts
 $ ansible all -m ping --ask-pass
+
+### these are the declared ansible hosts
+node1.example.com
+node2.example.com
+192.168.99.104
+192.168.99.101
