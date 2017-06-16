@@ -22,3 +22,28 @@ $ ansible-playbook -v apacheinst.yml --tags stop
 $ ansible-playbook -v apacheinst.yml --tags start
 
 $ ansible-playbook assert
+
+$ ansible-galaxy init apache --ofline
+$ yum install tree
+$ tree apache
+### role should be in the roles folder
+components of role
+==================
+files       static file to be pushed to the nodes are stored
+defaults    data about the application or role default var are stored here
+handlers    tasks which are based on some actions (trigger) ex: in case my httpd.conf changes it should restart service
+meta        information about the role things like author supported OS and dependencies
+task        actual action are stored here, core logic or code like installing pkgs cp files etc
+templates   similar to files accept templates support modification dynamic files jinja2 - template language
+vars        both vars and defaults store variables. variables stored under "vars" has got higher priority and diff to override 
+
+
+
+
+
+
+
+
+
+
+
