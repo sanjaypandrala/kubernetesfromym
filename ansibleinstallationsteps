@@ -11,4 +11,10 @@ node2.example.com
 192.168.99.104
 192.168.99.101
 
+
 $ ansible-playbook -v apacheinst.yml -v --step 
+$ ansible-playbook -v apacheinst.yml -v --step
+$ ansible-playbook -v apacheinst.yml -v --syntax-heck
+$ ansible-playbook -v apacheinst.yml -v --check
+
+
