@@ -17,4 +17,8 @@ $ ansible-playbook -v apacheinst.yml -v --step
 $ ansible-playbook -v apacheinst.yml -v --syntax-check
 $ ansible-playbook -v apacheinst.yml -v --check
 
+$ ansible-playbook -v apacheinst.yml --tags stop
 
+$ ansible-playbook -v apacheinst.yml --tags start
+
+$ ansible-playbook assert
