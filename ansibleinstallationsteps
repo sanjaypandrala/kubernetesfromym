@@ -14,7 +14,7 @@ node2.example.com
 
 $ ansible-playbook -v apacheinst.yml -v --step 
 $ ansible-playbook -v apacheinst.yml -v --step
-$ ansible-playbook -v apacheinst.yml -v --syntax-heck
+$ ansible-playbook -v apacheinst.yml -v --syntax-check
 $ ansible-playbook -v apacheinst.yml -v --check
 
 
