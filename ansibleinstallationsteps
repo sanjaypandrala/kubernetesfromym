@@ -31,11 +31,11 @@ components of role
 ==================
 files       static file to be pushed to the nodes are stored
 defaults    data about the application or role default var are stored here
-handlers    tasks which are based on some actions (trigger) ex: in case my httpd.conf changes it should restart service
-meta        information about the role things like author supported OS and dependencies
-task        actual action are stored here, core logic or code like installing pkgs cp files etc
+handlers    event handlers//tasks which are based on some actions (trigger) ex: in case my httpd.conf changes it should restart service
+meta        role dependencies //information about the role things like author supported OS and dependencies
+task        playbook tasks // actual action are stored here, core logic or code like installing pkgs cp files etc
 templates   similar to files accept templates support modification dynamic files jinja2 - template language
-vars        both vars and defaults store variables. variables stored under "vars" has got higher priority and diff to override 
+vars        var definations // both vars and defaults store variables. variables stored under "vars" has got higher priority and diff to override 
 
 
 
@@ -46,9 +46,26 @@ $ ansible-vault decrypt topsecret.yml
 $ ansible-vault encrypt topsecret.yml
 $ ansible-vault encrypt topsecret.yml --ask-vault-pass 
 $ ansible-doc -l 
+$ ansible-doc -s yum
+$ ansible all -m ping #   pings all servers
+$ ansibel all -m ping -o # to display in single line
+$ ansible all -m shell -a "uname -a; df -h"  
+$ ansible all -m shell -a "uname -a; df -h" -v 
+$ ansible node2.example.com -m yum -a "name=httpd state=present" 
+$ ansible node2.example.com -m yum -a "name=httpd state=present"  -s ### to run as root on client
+$ #### to give user root permission to a  user give visudo -f /etc/sudoers and enter  ALL=NOPASSWD: ALL
+$ ansible node2.example.com -m service -a "name=httpd state=started" -s ### to start the service on remote machine as root 
+$ ansible node2.example.com -m copy -a "src=/tmp/testfile dest=/tmp/testingfile" -s ### to copy from server to clientsmachine as root 
+$ sestatus to chk selinux
+$ ansible-playbook main.yml -i hosts
+$ ansible-playbook playbookname.yml --list-tags  ### will list all tags
+$ ansible -m setup all | grep ansible_distribution ### will give details of ansible distributions on all servers
 
+$ ansibel all -m shell -a "uname -a ; uptime"  ### give kernel versions 
 
+$ ansible all -m shell -a "ps -eaf | grep http" ### to check if app are running
 
+$ ansible all -l node2.example.com -m shell -a "systemctl stop httpd.service"
 
 
 
