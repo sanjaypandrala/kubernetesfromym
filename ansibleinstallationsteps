@@ -65,7 +65,7 @@ $ ansibel all -m shell -a "uname -a ; uptime"  ### give kernel versions
 
 $ ansible all -m shell -a "ps -eaf | grep http" ### to check if app are running
 
-$ ansible all -l node2.example.com -m shell -a "systemctl stop httpd.service"
+$ ansible all -l node2.example.com -m shell -a "systemctl stop httpd.service"   ### will stop running apps 
 
 
 
