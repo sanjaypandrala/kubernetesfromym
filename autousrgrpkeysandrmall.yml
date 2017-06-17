@@ -28,7 +28,7 @@
       user:
        name={{ item }}
        state=present
-       groups=demogrp
+       group=demogrp1
        password="123"
        shell=/bin/bash
       with_items:
@@ -49,6 +49,9 @@
        ssh_key_file=.ssh/id_rsa
       with_items:
        - demouser1
+       - demouser2
+       - demouser3
+       - demouser4
       tags: generate_ssh_keys
 
   ### this task is to copy the public keys to user account
