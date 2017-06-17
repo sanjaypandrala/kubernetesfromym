@@ -39,7 +39,9 @@ vars        both vars and defaults store variables. variables stored under "vars
 
 
 
-
+$  ansible-vault create topsecret.yml
+### enter vault password
+### 
 
 
 
