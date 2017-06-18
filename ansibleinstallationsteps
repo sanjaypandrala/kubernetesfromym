@@ -65,7 +65,16 @@ $ ansibel all -m shell -a "uname -a ; uptime"  ### give kernel versions
 
 $ ansible all -m shell -a "ps -eaf | grep http" ### to check if app are running
 
-$ ansible all -l node2.example.com -m shell -a "systemctl stop httpd.service"   ### will stop running apps 
+$ ansible all -l node2.example.com -m shell -a "systemctl stop httpd.service"   ### will stop running apps
+
+$ ansible -i /etc/ansible/hosts -m shell -a "ntpq -p" all
+$ ansible -i /etc/ansible/hosts -m shell -a "rpm qa | grep ntp" all
+$ ansible -i /etc/ansible/hosts -m shell -a "ntpq -p;date" all
+### this link as reference
+#git clone https://github.com/major/cis-rhel-ansible.git
+#
+#
+	 
 
 
 
