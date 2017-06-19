@@ -73,7 +73,8 @@ $ ansible -i /etc/ansible/hosts -m shell -a "ntpq -p;date" all
 ### this link as reference
 #git clone https://github.com/major/cis-rhel-ansible.git
 #
-#
+# for static inventory use "i"
+# for dynamic inventory http://docs.ansible.com/ansible/intro_dynamic_inventory.html
 	 
 
 
