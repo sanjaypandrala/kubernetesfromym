@@ -1,0 +1,38 @@
+pre-requisites 
+centos 7 64 bit /kernel 3.10.x
+yum install -y epel-release
+yum install -y docker
+systemctl enable docker
+systemctl start docker
+docker version
+docker info
+docker search centos
+docker pull centos:centos7
+docker ps -a
+docker network ls
+docker network inspect (network name)
+docer stats
+docker run -it -c 256 -m 300M centos:centos7 /bin/bash
+docker start
+docker stop
+docker restart
+docker commit [container id]
+docker tag [container id] < repo : tags >
+docker rm [contain id]
+docker logs [container id]
+mkdir -p /var/www/html
+echo "this is naga test docker site" > /var/www/html/demopage.txt
+docker run -d -p 8080:8080 --name="python_web" -v /usr/sbin:/usr/sbin -v /usr/bin:/usr/bin -v /usr/lib64:/usr/lib64 -w /var/www/hmlt -v /var/www/html centos:centos7 /bin/python -m simpleHTTPServer 8080
+
+-d , --detach ### run container in bg and print cid
+-p , -- publish value ### pub a container's port to the host def
+
+-v , --volume value ### bind mount a volume def
+-w , --workdir string ### working directory inside the cont
+
+netstat -tulpn | grep 8080
+curl localhost:8080/demowebpage.txt
+
+
+
+
