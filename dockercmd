@@ -21,8 +21,8 @@ docker tag [container id] < repo : tags >
 docker rm [contain id]
 docker logs [container id]
 mkdir -p /var/www/html
-echo "this is naga test docker site" > /var/www/html/demopage.txt
-docker run -d -p 8080:8080 --name="python_web" -v /usr/sbin:/usr/sbin -v /usr/bin:/usr/bin -v /usr/lib64:/usr/lib64 -w /var/www/hmlt -v /var/www/html centos:centos7 /bin/python -m simpleHTTPServer 8080
+echo "this is naga's test docker site" > /var/www/html/demopage.txt
+docker run -d -p 8080:8080 --name="python_web" -v /usr/sbin:/usr/sbin -v /usr/bin:/usr/bin -v /usr/lib64:/usr/lib64 -w /var/www/hmlt -v /var/www/html centos:centos7 /bin/python -m SimpleHTTPServer 8080
 
 -d , --detach ### run container in bg and print cid
 -p , -- publish value ### pub a container's port to the host def
@@ -32,7 +32,9 @@ docker run -d -p 8080:8080 --name="python_web" -v /usr/sbin:/usr/sbin -v /usr/bi
 
 netstat -tulpn | grep 8080
 curl localhost:8080/demowebpage.txt
-
+docker network inspect bridge
+docker commit cid
+docker tag cid sanjay/testimage:demoimage
 
 
 
