@@ -1,0 +1,91 @@
+#wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+
+#rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+
+#yum install jenkins
+
+#firewall-cmd --zone=public  --add-port=8080/tcp --permanent
+#firewall-cmd --zone=public  --add-service=http --permanent
+
+#firewall-cmd --reload
+#systemctl start jenkins 
+#systemctl stop jenkins 
+#systemctl restart jenkins 
+#systemctl status jenkins 
+#systemctl enable jenkins
+#
+######### script to check if app is running
+#!/bin/bash
+#  script name ./check_app.sh
+#  check if the app is running or not
+#  delete the old status file
+
+if [ -f /appstatus ] ; then
+	rm /appstatus
+fi
+
+# check the latest status for app services
+
+for server in appserver1;
+ do
+
+	if curl -s --head http://$server | grep "200 OK" > /dev/null;
+
+	then
+		echo " $server application up " >> /appstatus
+	else	
+		echo " $server application down " >> /appstatus
+
+        fi
+done
+
+chmod 777 /appstatus 
+
+########## restart application script
+#
+# usage ./restart_app.sh
+#
+# restart app if down
+
+touch /remediation_status
+chmod 777 /remediation_status
+
+## server with app down
+appdown=$ ( cat /appstatus | grep down | awk '{print $1}'
+
+## restart app and check the latest status for app servers
+#
+for server in $appdown ;
+do
+
+	sudo su -c ' ssh -q root@appserver1 "systemctl start httpd services "
+
+	if curl -s --head http://$server | grep "200 OK " > /dev/null; 
+
+then
+
+	echo "$server application restarted" >> /remediateion_status 
+
+else
+
+echo "$server application still have problems" >> /remediation_status
+
+fi
+
+done
+
+
+#################################
+#
+#### java installation 
+yum install -y java
+
+yum install -y jenkins
+
+
+
+
+
+
+
+                       
