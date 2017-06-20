@@ -76,7 +76,14 @@ $ ansible -i /etc/ansible/hosts -m shell -a "ntpq -p;date" all
 # for static inventory use "i"
 # for dynamic inventory http://docs.ansible.com/ansible/intro_dynamic_inventory.html
 	 
+# command to ping dynamic inventory
+$ ansible -i dynamic-inven-ec.py -u ec2-user tag_name_awslab* -m ping
 
+# static inventory 
+$ ansible -i /etc/ansible/hosts
 
-
+### ansible and aws integration
+# https://aws.amazon.com/blogs/apn/getting-started-with-ansible-and-dynamic-amazon-ec2-inventory-management/?adbid=562667719041245185&adbpl=tw&adbpr=192929401&adbsc=APN_Blog_20150203_39862237
+#
+#
 
