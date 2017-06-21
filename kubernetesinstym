@@ -1,0 +1,21 @@
+### set up preparation for kubernetes
+
+yum update -y
+systemctl disable firewalld
+### cat /etc/sysconfig/selinux
+SELINUX=disabled
+yum remove chrony -y
+yum install ntp -y
+systemctl enable ntpd.service
+systemctl start ntpd.service
+
+### update /etc/hosts on master and node in the absence of DNS server
+192.168.1.100	kube-master
+192.168.1.101	kube-node-1
+192.168.1.102	kube-node-2
+
+ping 192.168.1.[100-102]
+
+### installation and config steps
+#   cat /etc/yum.repos.d/virt7-docker-common-release.repo
+
