@@ -1,0 +1,1 @@
+ssh node2.example.com "if ! pgrep httpd > dev/null; then sudo systemctl start httpd; if [ 0 == 0 ] ; then echo '\' 'Apache started ' '\'; else echo '\' 'Apache start failed' '\'; fi ; else echo '\' 'Apache already running '\' '; fi  "
