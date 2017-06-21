@@ -1,0 +1,71 @@
+for SERVICES in kube-proxy kubelet flanneld docker ; do systemctl restart SERVICES; systemctl enable $SERVICES ; systemctl status $SERVICES ; done
+
+
+### https://kubernetes.io/docs/admin/cluster-large/
+
+### new node preparation
+yum update -y
+### disable firewall
+systemctl disable firewalld
+### disable the selinux
+cat /etc/sysconfig/selinux
+### remove the chrony and install ntp
+yum remove chrony -y
+yum install ntp -y
+systemctl enable ntpd.service
+systemctl start ntpd.service
+### update the /etc/hosts on master and nodes in the absence of DNS server
+192.x.x.100	kuber-master
+192.x.x.101	kuber-node-1
+192.x.x.102	kuber-node-2
+192.x.x.103	kuber-node-3
+
+### validate the kubernetes master and node are able to ping each other using the IP Address
+ping 19.x.x.[100-103]
+
+### install the required packages and update the configuration
+#
+### create repo file on the new node
+#   cat /etc/yum.repos.d/virt7-docker-common-release.repo
+[virt7-docker-common-release]
+name=virt7-docker-common-release
+baseurl=http://cbs.centos.org/repos//virt7-docker-common-release/x86_64/os/gpgcheck=0
+
+#   install kubernetes, etcd, flannel on the new node
+yum -y install --enablerepo=virt7-docker-common-release kubernetes etcd flannel
+
+#   add the following entries on the configuration, proxy and flannel configuration files
+#   cat /etc/kubernetes/config
+KUBE_LOGTOSTDERR="--logtostderr=true"
+KUBE_LOG_LEVEL="--v=0"
+KUBE_ALLOW_PRIV="--allow-privileged=false"
+KUBE_MASTER="--master=http:/kube-master:237+9"
+
+#   cat /etc/sysconfig/flanneld
+FLANNEL_ETCD_ENDPOINTS"http://kube-master:2379"
+FLANNEL_ETCD_PREFIX"kube=centos/network"
+FLANNEL_OPTIONS"--iface=eth1"
+
+
+KUBELET_ADDRESS"--address=0.0.0.0"
+KUBELET_PORT"--port=10250"
+KUBELET_HOSTNAME"--hostname-override=kube-node-3"
+KUBELET_API_SERVER"--api-servers-http://kube-master:8080"
+KUBELET_ARGS" "
+
+### enable the service and add node to the running cluster
+#   start the proxy , flannel and docker service on the new node
+for SERVICES in kube-proxy kubelet flanneld docker ; do systemctl restart $SERVICES; systemctl enable $SERVICES; systemctl status $SERVICES; done
+
+#   set and enable the cluster config context on the new node
+kubectl config set-cluster default-cluster --server=http://kube-master:8080
+kubectl config set-cluster default-cluster --cluster=default=cluster --user=default-admin
+kubectl config use-context default-context
+
+kubectl get nodes
+
+kubectl run ngnix-lab-newnode --image-nginx --port 80 --replicas=3
+
+kubectl get pods -o wide ### to get ip of nodes
+
+
