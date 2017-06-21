@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  var:
+   password: $1$test$MtDWUQ/jHGjFS36uNdqos/
+
+  tasks:
+
+  - name: User Creation and Setting up Encrypted Password
+    user: name=testuser password={password}
+
+
