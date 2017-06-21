@@ -1,0 +1,5 @@
+---
+### installing with ansi role
+
+  - hosts: node2.example.com
+    roles: apache

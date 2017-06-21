@@ -34,7 +34,53 @@ netstat -tulpn | grep 8080
 curl localhost:8080/demowebpage.txt
 docker network inspect bridge
 docker commit cid
-docker tag cid sanjay/testimage:demoimage
+###############
+### configuring the custom docker networking ###
+systemctl stop docker.service
+ip link set dev docker0 down
+sysctl net-ipv4.conf.all.forwarding
+### update new subnet in the /etc/sysconfig/docker-network add the follwing to DOCKER_NETWORK_OPTIONS :-
+
+###Example
+DOCKER_NETWORK_OPTIONS="--bip=10.10.10.50/24"
+
+###Remove default subnet's MASQUERADE rules from the POSTROUTING chain in newtwork iptables.
+
+ iptables -t nat -L -n
+ iptables - -t nat -F POSTROUTING
+ iptables -F DOCKER
+### start docker service
+systemctl start docker.service
+ip addr show docker0 ### to see the new of the container ###
+### verify that the MASQUERADE rule have new subnet added to the POSTROUTING chain.
+
+ip tables -t nat -L -n
+
+### validation 
+### check the new subnet is on the bridge now
+docker network inspect bridge
+
+### check IP Address of the container
+docker inspect -f '{{ NetworkSetting.IPAddress }}' [cid]
+
+### run a docker container and check container have
+docker run -it [container name] /bin/bash
+df -h
+### inside the container yum install -y net-tools to get ipconfig working ###
+yum install -y net-tools
+ping google.com
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
