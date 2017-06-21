@@ -1,0 +1,18 @@
+#!/bin/bash
+
+### This prints a line containing the Martin pattern.
+
+awk '/Martin/' filename.txt
+
+### This awk command prints the first field of all the lines from the filename.txt file
+
+awk '{ print $1 }' filename.txt
+
+### This prints the first and second field of the line that contains the Martin pattern
+
+awk '/Martin/{print $1, $2}' filename.txt
+
+
+
+
+

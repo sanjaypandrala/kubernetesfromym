@@ -1,0 +1,4 @@
+# dialog  --inputbox  "Please enter something."   10  50 \
+2> /tmp/tempfile
+VAR=`cat ~/work/output.txt
+

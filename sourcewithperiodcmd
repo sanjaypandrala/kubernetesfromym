@@ -1,0 +1,9 @@
+#The syntax is as follows:
+
+$ source filename [arguments]
+$ . filename [arguments]
+$ source functions.sh
+$ . functions.sh
+#If we pass command-line arguments, these will be handled inside a script as $1, $2, and more:
+$ source functions.sh arg1 arg2
+$ ./path/to/functions.sh arg1 arg2

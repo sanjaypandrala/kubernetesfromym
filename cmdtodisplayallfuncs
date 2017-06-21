@@ -1,0 +1,4 @@
+$ declare -f
+### usage If you want to see a particular function, then here is the command:
+
+$ declare -f hello

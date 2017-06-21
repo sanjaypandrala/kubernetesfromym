@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# ask a user what dir he wants to activate and next show a list
+# of files in that directory
+
+echo What Directory do you want to activate?
+read DIR
+cd $DIR
+
+for i in *
+do
+	echo found file $i
+	echo do you want to see it?
+	read
+	cat $i
+done

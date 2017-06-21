@@ -1,0 +1,47 @@
+#!/bin/bash
+### this tells sed to delete all the lines containing the Apple pattern
+sed 'Apple/d' item.list
+### this will delete all the lines except the line containing the Apple pattern
+sed '/Apple/!d' item.list
+### modify a file with sed , this will delete line 1 to 3 and stores the output in tempfile then it will rename tempfile with newfile
+sed '1,3d' datafile > tempfile
+mv temfile newfile
+
+### -n option will suppress the default printing of all lines but prints the line that contains the text pattern USA
+sed -n '/USA/p' filename.txt
+
+### '$d' deletes the last line '3,$d' deletes third line to the last line '3d' deletes only third line in output
+
+
+### sed '/japan/d' deletes the line containing japan
+### sed '/japan/!d' deletes the all lines that don't contain  japan
+
+
+### sed '4,+5d'  will delete line 4 and next five lines
+
+### sed '1,5!d'  will keep lines 1 to 5 and delete all other lines
+
+### If we want to substitute the text by new text, then we can use commands. After the forward slash, the regular expression is enclosed and then the text to be substituted is placed. If the g option is used, then substitution will happen globally, meaning that it will be applied in the full document. Otherwise, only the first instance will be substituted:
+
+sed 's/Cashew/Almonds/g' filename.txt
+
+### multiple edits with e command fifth line is deleted and cashew is replaced with almond
+
+sed -e '5d' -e 's/cashew/almonds/' filename.txt
+
+### If we need to insert text from another file into the file, which is processed by sed, then we can use the r command. We can insert text from another file to the specified location
+
+### The sed command for write is w. Using this command, we can write lines from one file to another file
+
+### The a command is used for appending. When the append command is used, it appends the text after the line in the pattern space, in which the pattern is matched. The backslash should be placed immediately after the a command. On the next line, the text to be appended is to be placed
+
+### The i command is used for inserting text above the current pattern space line. When we use the append command, new text is inserted after the current line which is in the pattern buffer. In this similar-to-append command, the backslash is inserted after the i command
+
+### The c command is the change command. It allows the sed to modify or change existing text with new text. The old text is overwritten with the new
+
+### The command transform the y cmd is similar to the Linux tr command. The characters are translated as per character sequence given. For example, y/ABC/abc/ will convert lowercase abc into uppercase ABC
+
+### The q command is used for quitting the sed processing without proceeding to the next lines
+
+### The x is an exchange command. By using this command, we can exchange the holding buffer with the current line in the pattern buffer... the line with the Apple pattern is stored in the holding buffer. When the pattern with Cashew is found, that line will be exchanged by the holding buffer. 
+sed -e '/Apple/h'  -e '/Cashew/x' shopping.txt

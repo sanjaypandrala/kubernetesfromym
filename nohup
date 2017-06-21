@@ -1,0 +1,13 @@
+#Sometimes we may need our script to run even after we log out, such as when taking a back up and similar activities. In this case, even if we log out, the system is powered on and running. In such situations, we can use the nohup command. The nohup command prevents the process from terminating using the SIGHUP signal.
+
+#The nohup command makes our script run without attaching it to a terminal. Therefore, if we use the echo command to print text on the terminal. It will not be printed in a terminal, since the script is not attached to a terminal. In such cases, we need to redirect the output to the file, or nohup will automatically redirect the output to a nohup.out file.
+
+#Therefore, if we need to run a process, even if we log out, we need to use the nohup command as follows:
+
+$ nohup command &
+#The example is as follows:
+
+$ nohup sort emp.lst &
+#This will run a program to sort the emp.lst file in the background.
+
+$ nohup date &

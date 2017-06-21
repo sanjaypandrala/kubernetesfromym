@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ dialog --checklist "This is a checklist" 10 50 2 \
+"a"  "This is one option" "on" \
+"b" "This is the second option" "off"
