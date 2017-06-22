@@ -1,0 +1,105 @@
+### set up preparation for kubernetes
+
+yum update -y
+systemctl disable firewalld
+### cat /etc/sysconfig/selinux
+SELINUX=disabled
+yum remove chrony -y
+yum install ntp -y
+systemctl enable ntpd.service
+systemctl start ntpd.service
+
+### update /etc/hosts on master and node in the absence of DNS server
+192.168.1.100   kube-master
+192.168.1.101   kube-node-1
+192.168.1.102   kube-node-2
+
+ping 192.168.1.[100-102]
+
+### installation and config steps
+#   cat /etc/yum.repos.d/virt7-docker-common-release.repo
+name=virt7-docker-common-release
+baseurl=http://cbs.centos.org/repos/virt7-docker-common-release/x86_64/os/gpgcheck=0
+
+#   install kubernetes,etcd and flannel on all hosts [master and nodes]
+yum -y install --enablerepo=virt7-docker-common-release kubernetes etcd flannnel
+
+#   add below config in /etckubernetes/config [master and nodes]
+KUBE_LOGTOSTDERR="--logtostderr=true"
+KUBE_LOG_LEVEL="--v=0"
+KUBE_ALLOW_PRIV="--allow-privileged=false"
+KUBE_MASTER="--master=http://kube-master:8080"
+
+# config the kubernetes services on the master
+ETCD_NAME=default
+ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379"
+ETCD_ADVERTISE_CLIENT_URLS="http://0.0.0.0:2379"
+# add following lines in /etc/kubernetes/appserver
+KUBE_API_ADDRESS="--address=0.0.0.0"
+KUBE_API_PORT="--port=8080"
+KUBELET_PORT"=kubelet-port=10250"
+KUBE_ETCD_SERVERS="--etcd-servers=http://kube-master:2379"
+KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=10.0254.0.0/16"
+KUBE_API_ARGS=""
+
+# start ETCD and config it to hold the network overlay config on master warning this network must be unused in your network infrastructure ! 172.30.0.0/16 if free in our network
+#
+systemctl start etcd
+etcdctl mkdir /kube-centos/network
+etcdctl mk /kube-centos/network/config "{ \"Network\": \"172.30.0.0/16", \"SubnetLen\":24, \"Backend\": ( \"Type\": \"vxlan\" )}
+
+# configure flannel to overlay docker network in /etc/sysconfig/flanneld hosts [master and nodes]
+#
+FLANNEL_ETCD_ENDPOINTS="http://kube-master:2379"
+FLANNEL_ETCD_PREFIX="/kube-centos/network"
+FLANNEL_OPTIONS="--iface=eth1"
+# configure the kubernetes services on the nodes
+# add the following lines in /etc/kubernetes/kubelet"
+KUBELET_ADDRESS="--address=0.0.0.0"
+KUBELET_PORT="--port=10250"
+KUBELET_HOSTNAME="--hostname-override=kube-node-n" ### replace n with node number
+KUBELET_API_SERVER="--api-servers=http://kube-master:8080"
+KUBELET_ARGS=""
+# start the app services on matter
+for SERVICES in etcd kube-apiserver kube-controller-manager kube-scheduler flanneld;
+do 
+systemctl restart $SERVICES
+systemctl enable $SERVICES
+systemctl status $SERVICES
+done
+# start the appropriate services on nodes
+#
+#
+
+for SERVICES in etcd kube-proxy kubelet flanneld;
+do 
+systemctl restart $SERVICES
+systemctl enable $SERVICES
+systemctl status $SERVICES
+done
+
+# config kubectl on the nodes
+kubectl config set-cluster default-cluster --server=http://kube-master:8080
+kubectl config set-context default-context --cluster=default-cluster --user=default-admin
+kubectl config use-context default-context
+
+# verify kube master and see the cluster nodes
+kubectl get nodes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
